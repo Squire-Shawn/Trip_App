@@ -1,6 +1,6 @@
 var express = require('express'),
   app = express(),
-  port = process.argv[2] || 8080,
+  port = 8080 || process.argv[2],
   bodyParser = require('body-parser').json,
   mongoose = require('mongoose'),
   passport = require('passport'),
@@ -14,23 +14,26 @@ mongoose
 });
 
 app
+  .use(bodyParser())
+  .use(express.static(__dirname + 'public'))
   .use(passport.initialize())
   .use(passport.session())
   .use(session({
     secret: 'some_trips_are_not_worth_taking',
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: true
   }))
-  .get('/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'manage_pages'] }))
-  .get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
-    function(req, res) {
-    // Successful authentication, redirect home.
-    // res.redirect('/');
-    res.send('GOT EEEEM');
+
+  .get('/', function(req, res) {
+    return res.json('oops');
   })
-  .use(bodyParser())
-  .use(express.static(__dirname + 'public'))
+  .get('/home', function(req, res) {
+    return res.status(200).json('Welcome' + ' ' + req.session.passport.user.name);
+  })
+  .get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+  .get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/', successRedirect: '/home' }))
+
 
   .listen(port, function() {
     console.log('Listening on:', port);

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"mongod\" \"nodemon\" \"gulp\"",
+    "dev": "concurrently \"mongod\" \"nodemon server.js\" \"gulp\"",
     "start": "npm run dev"
   },
   "repository": {
