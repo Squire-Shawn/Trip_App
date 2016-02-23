@@ -15,7 +15,7 @@ mongoose
 
 app
   .use(bodyParser())
-  .use(express.static(__dirname + 'public'))
+  .use(express.static(__dirname + '/public'))
   .use(passport.initialize())
   .use(passport.session())
   .use(session({
@@ -25,14 +25,14 @@ app
   }))
 
   .get('/', function(req, res) {
-    return res.json('oops');
+    return res.end();
   })
   .get('/home', function(req, res) {
-    return res.status(200).json('Welcome' + ' ' + req.session.passport.user.name);
+    return res.end();
   })
   .get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
   .get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/', successRedirect: '/home' }))
+  passport.authenticate('facebook', { failureRedirect: '/#/', successRedirect: '/#/' }))
 
 
   .listen(port, function() {
