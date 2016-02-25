@@ -10,7 +10,10 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   paths = {
     sass: ['./public/styles/**/*.{sass, scss}'],
-    js: ['public/node_modules/ng-file-upload/dist/ng-file-upload-shim.js', 'public/node_modules/ng-file-upload/dist/ng-file-upload-all.js', './public/app/**/*.js']
+    js: ['public/node_modules/ng-file-upload/dist/ng-file-upload-shim.js',
+     'public/node_modules/ng-file-upload/dist/ng-file-upload-all.js',
+      'public/node_modules/angular-cookies/angular-cookies.js',
+       './public/app/**/*.js']
   };
 
 gulp

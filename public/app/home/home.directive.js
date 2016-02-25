@@ -8,7 +8,7 @@ angular.module('app')
         $scope.upload($scope.files);
       });
       $scope.$watch('file', function() {
-        if($scoe.file) {
+        if($scope.file) {
           $scope.files = [$scope.file];
         }
       });
@@ -19,11 +19,11 @@ angular.module('app')
           Upload.upload({
             url: '/uploadPictures',
             data: {
-              Key: 
+              Key: files
             }
-          })
+          });
         }
-      }
+      };
     }
   };
 });
