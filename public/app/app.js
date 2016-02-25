@@ -7,7 +7,7 @@ angular.module('app', ['ui.router'])
 
     .state('home', {
       url: '/',
-      template: ''
+      template: '<ss-home></ss-home>'
     });
 
 });

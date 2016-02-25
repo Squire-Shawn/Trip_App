@@ -5,7 +5,9 @@ var express = require('express'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   session     = require('express-session'),
-  facebook = require('./api/config/passport_facebook.config');
+  facebook = require('./api/config/passport_facebook.config'),
+  aws = require('./api/config/aws.config');
+
 
 mongoose
   .set('debug', true)
@@ -24,15 +26,10 @@ app
     saveUninitialized: true
   }))
 
-  .get('/', function(req, res) {
-    return res.end();
-  })
-  .get('/home', function(req, res) {
-    return res.end();
-  })
-  .get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
-  .get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/#/', successRedirect: '/#/' }))
+  .get('/getAll', aws.getAll)
+  .get('/home', aws.getAll)
+  .get('/facebook', passport.authenticate('facebook', { scope: ['email', 'user_friends'] }))
+  .get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/#/', successRedirect: '/#/' }))
 
 
   .listen(port, function() {
