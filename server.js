@@ -26,7 +26,7 @@ app
     saveUninitialized: true
   }))
 
-  .get('/getAll', aws.getAll)
+  .get('/getAll', aws.uploadPhoto)
   .get('/home', aws.getAll)
   .get('/facebook', passport.authenticate('facebook', { scope: ['email', 'user_friends'] }))
   .get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/#/', successRedirect: '/#/' }))

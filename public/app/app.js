@@ -1,4 +1,9 @@
-angular.module('app', ['ui.router'])
+angular.module('app', ['ui.router', 'ngFileUpload', 'ngCookies'])
+
+.run(function($http, $cookies) {
+  
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');

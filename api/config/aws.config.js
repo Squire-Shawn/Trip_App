@@ -5,6 +5,12 @@ module.exports = {
 
   getAll: function(req, res) {
     res.json('Get All');
+  },
+  uploadPhoto: function(req, res) {
+    S3.putObject(req.body, function(err, resp) {
+      if(err) return res.status(500).json(err);
+      return res.status(200).json(resp);
+    });
   }
 
 };
